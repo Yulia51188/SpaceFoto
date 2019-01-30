@@ -26,7 +26,7 @@ def main():
     response_json = response.json()
     image_urls = response_json["links"]["flickr_images"]
     for image_index, image_url in enumerate(image_urls, 1):
-        image_filename = 'space{number}.jpeg'.format(number=image_index)
+        image_filename = 'space{number}.jpg'.format(number=image_index)
         print(download_image(image_url, image_filename))
 
 
