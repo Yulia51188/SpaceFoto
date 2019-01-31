@@ -18,13 +18,18 @@ def download_image(image_url, image_filename):
     return('Image saved as ../images/{0}'.format(image_filename))
 
 
-def main():
+def fetch_spacex_foto_latest_launch():
     spacex_url = 'https://api.spacexdata.com/v3/launches/latest'
     response = requests.get(spacex_url)
     if not response.ok:
     	exit('Request error: {0}'.format(response.text))
     response_json = response.json()
-    image_urls = response_json["links"]["flickr_images"]
+    image_urls = response_json["links"]["flickr_images"]	
+    return image_urls
+
+
+def main():
+    image_urls = fetch_spacex_foto_latest_launch()
     for image_index, image_url in enumerate(image_urls, 1):
         image_filename = 'space{number}.jpg'.format(number=image_index)
         print(download_image(image_url, image_filename))
