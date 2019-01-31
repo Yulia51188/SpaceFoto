@@ -28,11 +28,31 @@ def fetch_spacex_foto_latest_launch():
     return image_urls
 
 
-def main():
-    image_urls = fetch_spacex_foto_latest_launch()
+def fetch_hubble_fotos(collection='news'):
+    hubble_url = 'http://hubblesite.org/api/v3/image/3811'
+    response = requests.get(hubble_url)
+    response_json = response.json()
+    image_files_list = response_json['image_files']
+    return image_urls
+
+
+def get_file_extention(url):
+	parts = url.split('.')
+	return parts[-1]
+
+
+def download_images_by_urls(image_urls, image_file_name='space'):
     for image_index, image_url in enumerate(image_urls, 1):
-        image_filename = 'space{number}.jpg'.format(number=image_index)
+        ext = get_file_extention(image_url)
+        image_filename = '{name}{number}.{extention}'.format(
+        	name=image_file_name, 
+        	number=image_index,
+        	extention=ext
+        )
         print(download_image(image_url, image_filename))
+
+def main():
+    download_images_by_urls(fetch_spacex_foto_latest_launch(), 'SpaceX')
 
 
 if __name__ == '__main__':
