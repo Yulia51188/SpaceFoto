@@ -6,17 +6,17 @@ import instabot
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
-        description='Publish photos from the folder to Instagramm'
+        description='Publish photos from the folder to Instagram'
     )
     parser.add_argument(
         'login',
         type=str,
-        help='Username in Instagramm'
+        help='Username in Instagram'
     )
     parser.add_argument(
         'password',
         type=str,
-        help='password in Instagramm'
+        help='password in Instagram'
     )   
     parser.add_argument(
         'folder',
@@ -38,7 +38,6 @@ def publish_to_instagramm(username, password, folder):
     		image_filenames.append(os.path.join(root, filename))
     for image_filename in image_filenames:
         bot.upload_photo(image_filename, '#space')
-        #if bot.api.last_response.status_code != 200:
 
 
 def main():
