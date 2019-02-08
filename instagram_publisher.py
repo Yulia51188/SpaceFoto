@@ -34,8 +34,8 @@ def publish_to_instagramm(username, password, folder):
     file_tree = os.walk(folder)
     image_filenames = []
     for root, dirs, filenames in file_tree:
-    	for filename in filenames:
-    		image_filenames.append(os.path.join(root, filename))
+        for filename in filenames:
+            image_filenames.append(os.path.join(root, filename))
     for image_filename in image_filenames:
         bot.upload_photo(image_filename, '#space')
 
@@ -43,9 +43,9 @@ def publish_to_instagramm(username, password, folder):
 def main():
     args = parse_arguments()
     if not os.path.isdir(args.folder):
-    	exit("The specified directory '{0}' doesn't exist".format(args.folder))
+        exit("The specified directory '{0}' doesn't exist".format(args.folder))
     publish_to_instagramm(args.login, args.password, args.folder)
 
 
 if __name__ == '__main__':
-	main()
+    main()
