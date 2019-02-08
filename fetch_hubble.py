@@ -52,13 +52,12 @@ def fetch_hubble_photos_from_collection(
     if not response.ok:
         exit('Request error: {0}'.format(response.status_code))
     response_json = response.json()
-    image_id_list = []
-    for image_info in response_json:
-        image_id_list.append(image_info["id"])
-    image_urls = []
-    for image_id in image_id_list:
-        image_urls.append(fetch_hubble_photo_by_id(hubble_url_template, image_id))
-    return image_urls[:image_count]
+    image_id_list = [image_info["id"] for image_info in response_json]
+    image_urls = [
+        fetch_hubble_photo_by_id(hubble_url_template, image_id_list[index])
+        for index in range(image_count)
+    ]
+    return image_urls
 
 
 def main():

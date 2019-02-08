@@ -34,8 +34,7 @@ def publish_to_instagramm(username, password, folder):
     file_tree = os.walk(folder)
     image_filenames = []
     for root, dirs, filenames in file_tree:
-        for filename in filenames:
-            image_filenames.append(os.path.join(root, filename))
+        image_filenames = [os.path.join(root, filename) for filename in filenames]
     for image_filename in image_filenames:
         bot.upload_photo(image_filename, '#space')
 
