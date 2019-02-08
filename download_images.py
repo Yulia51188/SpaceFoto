@@ -40,18 +40,18 @@ def get_file_extention(url):
 
 def download_image(image_url, image_filename):
     response = requests.get(image_url)
-    if not response.ok:
-        return('Request error: {0}'.format(response.text))
-    save_image_as_file_in_folder(response.content, 
+    response.raise_for_status()
+    if response.ok:
+        save_image_as_file_in_folder(response.content, 
             image_filename=image_filename)
-    return('Image {0} saved as ../images/{1}'.format(image_url, image_filename))
+        return('Image {0} saved as ../images/{1}'.format(image_url, image_filename))
 
     
-def download_images_by_urls(image_urls, image_file_name='space'):
+def download_images_by_urls(image_urls, image_filename_template='space'):
     for image_index, image_url in enumerate(image_urls, 1):
         ext = get_file_extention(image_url)
         image_filename = '{name}{number}.{extention}'.format(
-            name=image_file_name, 
+            name=image_filename_template, 
             number=image_index,
             extention=ext
         )

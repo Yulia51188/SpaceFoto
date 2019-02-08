@@ -64,7 +64,7 @@ def main():
     args = parse_arguments()
     image_urls = fetch_hubble_photos_from_collection(collection=args.collection, 
         image_count=args.count, page=args.page_number)
-    print(download_images.download_images_by_urls(image_urls, 'Hubble'))
+    download_images.download_images_by_urls(image_urls, 'Hubble')
 
 
 if __name__ == '__main__':

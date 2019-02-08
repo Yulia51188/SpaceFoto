@@ -15,7 +15,7 @@ def fetch_spacex_photo_latest_launch(
 
 def main():
     image_urls = fetch_spacex_photo_latest_launch()
-    print(download_images.download_images_by_urls(image_urls, 'SpaceX'))
+    download_images.download_images_by_urls(image_urls, 'SpaceX')
 
 
 if __name__ == '__main__':
