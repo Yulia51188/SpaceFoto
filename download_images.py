@@ -39,12 +39,16 @@ def get_file_extention(url):
 
 
 def download_image(image_url, image_filename):
-    response = requests.get(image_url)
-    response.raise_for_status()
-    if response.ok:
-        save_image_as_file_in_folder(response.content, 
-            image_filename=image_filename)
-        return('Image {0} saved as ../images/{1}'.format(image_url, image_filename))
+    try:
+        response = requests.get(image_url)
+        response.raise_for_status()
+        if response.ok:
+            save_image_as_file_in_folder(response.content, 
+                image_filename=image_filename)
+            return('Image {0} saved as ../images/{1}'.format(image_url, image_filename))
+    except requests.exceptions.HTTPError as error:
+        return("Can't download image by url {0} with error: \n {1}".format(
+            image_url, error))
 
     
 def download_images_by_urls(image_urls, image_filename_template='space'):

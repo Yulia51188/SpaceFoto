@@ -49,22 +49,22 @@ def fetch_hubble_photos_from_collection(
     hubble_url = hubble_url_template.format(method=hubble_api_method)
     params = {'page': page}
     response = requests.get(hubble_url, params=params)
-    if not response.ok:
-        exit('Request error: {0}'.format(response.status_code))
+    response.raise_for_status()
     response_json = response.json()
-    image_id_list = [image_info["id"] for image_info in response_json]
-    image_urls = [
-        fetch_hubble_photo_by_id(hubble_url_template, image_id_list[index])
-        for index in range(image_count)
-    ]
+    image_id_list = [image_info["id"] for image_info in response_json][:image_count]
+    image_urls = [fetch_hubble_photo_by_id(hubble_url_template, image_id)
+        for image_id in image_id_list]
     return image_urls
 
 
 def main():
     args = parse_arguments()
-    image_urls = fetch_hubble_photos_from_collection(collection=args.collection, 
-        image_count=args.count, page=args.page_number)
-    download_images.download_images_by_urls(image_urls, 'Hubble')
+    try:
+        image_urls = fetch_hubble_photos_from_collection(collection=args.collection, 
+            image_count=args.count, page=args.page_number)
+        download_images.download_images_by_urls(image_urls, 'Hubble')
+    except requests.exceptions.HTTPError as error:
+        exit("Can't get data from server:\n{0}".format(error))
 
 
 if __name__ == '__main__':
