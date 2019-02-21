@@ -62,6 +62,16 @@ def download_images_by_urls(image_urls, image_filename_template='space'):
         print(download_image(image_url, image_filename))
 
 
+def download_images_by_urls_and_names(image_urls):
+    for image_index, image in enumerate(image_urls, 1):
+        ext = get_file_extention(image['url'])
+        image_filename = '{name}.{extention}'.format(
+            name=image['name'],       
+            extention=ext
+        )
+        print(download_image(image['url'], image_filename))
+
+
 def main():
     args = parse_arguments()
     download_images_by_urls(args.url_list, args.filename)

@@ -63,9 +63,7 @@ def main():
     try:
         image_urls = fetch_hubble_photos_from_collection(collection=args.collection, 
             image_count=args.count, page=args.page_number)
-        print(image_urls)
-        exit()
-        download_images.download_images_by_urls(image_urls, 'Hubble')
+        download_images.download_images_by_urls_and_names(image_urls)
     except requests.exceptions.HTTPError as error:
         exit("Can't get data from server:\n{0}".format(error))
 
