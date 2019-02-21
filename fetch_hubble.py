@@ -35,9 +35,9 @@ def fetch_hubble_photo_by_id(hubble_url_template, image_id):
     if not response.ok:
         return None
     response_json = response.json()
-    print(response_json)
-    image_filename = response_json['image_files'][-1]["file_url"]
-    return image_filename
+    image_url = response_json['image_files'][-1]["file_url"]
+    image_filename = response_json["name"]
+    return {'url': image_url, 'name': image_filename}
 
 
 def fetch_hubble_photos_from_collection(
@@ -53,9 +53,9 @@ def fetch_hubble_photos_from_collection(
     response.raise_for_status()
     response_json = response.json()
     image_id_list = [image_info["id"] for image_info in response_json][:image_count]
-    image_urls = [fetch_hubble_photo_by_id(hubble_url_template, image_id)
+    image_urls_with_names = [fetch_hubble_photo_by_id(hubble_url_template, image_id)
         for image_id in image_id_list]
-    return image_urls
+    return image_urls_with_names
 
 
 def main():
@@ -63,6 +63,7 @@ def main():
     try:
         image_urls = fetch_hubble_photos_from_collection(collection=args.collection, 
             image_count=args.count, page=args.page_number)
+        print(image_urls)
         exit()
         download_images.download_images_by_urls(image_urls, 'Hubble')
     except requests.exceptions.HTTPError as error:
