@@ -2,8 +2,8 @@
 
 The project includes 4 modules: 
 - `instagram_publisher.py` - it publicates all photos in the specified folder (including subdirectories), uses [Instabot](https://instagrambot.github.io/docs/en/For_developers.html#photos)
-- `download_images.py` - it downloads images by url list
-- `fetch_hubble.py` - it fetchs images url list from the specified photo collection of Hubble telescope using [Hubble API](http://hubblesite.org/api/documentation) and than downloads images using `def download_images_by_urls(image_urls, image_file_name='space')`from `download_images.py` 
+- `download_images.py` - it downloads images by url list to the folder "images"
+- `fetch_hubble.py` - it fetchs images url list from the specified photo collection of Hubble telescope using [Hubble API](http://hubblesite.org/api/documentation) and than downloads images using `def download_images_by_urls_with_names(image_urls)`from `download_images.py` 
 - `fetch_spacex.py` - it fetchs images url list from the latest launch photo collection of SpaceX using [SpaceX API](https://documenter.getpostman.com/view/2025350/RWaEzAiG#bc65ba60-decf-4289-bb04-4ca9df01b9c1) and than downloads images using `def download_images_by_urls(image_urls, image_file_name='space')`from `download_images.py` 
 
 # How to install
