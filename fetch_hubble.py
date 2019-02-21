@@ -9,7 +9,7 @@ def parse_arguments():
     )
     parser.add_argument(
         '-c', '--collection',
-        default='news',
+        default='spacecraft',
         type=str,
         help='collection name in Hubble API'
     )

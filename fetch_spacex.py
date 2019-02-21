@@ -17,7 +17,6 @@ def fetch_spacex_photo_latest_launch(
         for index, image_url in enumerate(
             response_json['links']['flickr_images'], 1)
     ]
-    print(image_urls)
     return image_urls
 
 
