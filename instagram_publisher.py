@@ -9,16 +9,6 @@ def parse_arguments():
     parser = argparse.ArgumentParser(
         description='Publish photos from the folder to Instagram'
     )
-    # parser.add_argument(
-    #     'login',
-    #     type=str,
-    #     help='Username in Instagram'
-    # )
-    # parser.add_argument(
-    #     'password',
-    #     type=str,
-    #     help='password in Instagram'
-    # )   
     parser.add_argument(
         'folder',
         type=str,
@@ -38,8 +28,7 @@ def publish_to_instagramm(username, password, folder):
         image_filenames = [os.path.join(root, filename) for filename in filenames]
     for image_filename in image_filenames:
         title = os.path.splitext(os.path.basename(image_filename))[0]
-        print(title)
-        #bot.upload_photo(image_filename, '#{0}'.format(title))
+        bot.upload_photo(image_filename, '{0}'.format(title))
 
 
 def main():
